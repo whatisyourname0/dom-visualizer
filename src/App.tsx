@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled from "styled-components";
+import Sidebar from "./Components/Sidebar/SIdebar";
+import { MAIN_COLOR } from "./styles/colors";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MainCointainer>
+      <Sidebar />
+      <MainSection>
+        Ho!
+      </MainSection>
+    </MainCointainer>
   );
 }
+
+const MainCointainer = styled.div`
+  width: 100vw;
+  height: 100vh;
+
+  display: grid;
+  grid-template-columns: 450px 1fr;
+
+  overflow: hidden;
+  background-color: ${MAIN_COLOR}
+`;
+
+const MainSection = styled.div`
+  width: 100%;
+  height: 100%;
+`
 
 export default App;
