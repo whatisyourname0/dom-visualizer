@@ -5,7 +5,7 @@ function Editor() {
     <Textarea
       autoFocus={false}
       defaultValue={defaultText}
-    >Hey!</Textarea>
+    ></Textarea>
   );
 }
 
