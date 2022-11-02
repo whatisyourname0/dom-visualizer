@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Sidebar from "./Components/Sidebar/SIdebar";
+import Sidebar from "./Components/Sidebar/Sidebar";
 import { MAIN_COLOR } from "./styles/colors";
 
 function App() {

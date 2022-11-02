@@ -1,6 +1,13 @@
+import { trimAll } from "../utils/trimAll";
+
 export const parser = (target) => {
-  target = target.trim();
-  const result = { name: "ROOT", type: "node", children: [] };
+  target = trimAll(target);
+  const result = {
+    name: "ROOT",
+    type: "node",
+    attribute: [],
+    children: [],
+  };
   const stack = [{ tag: result }];
 
   let current;
@@ -36,19 +43,30 @@ const textNode = (target, ptr, current) => {
 
 const elementNode = (target, ptr, idx, current, stack) => {
   const isClose = target[idx - 1] === "/";
+  const [name, ...attrs] = target.substring(ptr + 1, idx - Number(isClose)).split(" ");
+  let attributeArray = [];
+
+  if (attrs) {
+    for (let attr of attrs) {
+      const [attrName, property] = attr.split("=");
+      attributeArray.push({
+        attrName: attrName,
+        property: property.replace(/(^"|"$)/g, ""),
+      });
+    }
+  }
+
   const tag = {
-    name: target.substring(ptr + 1, idx - (isClose ? 1 : 0)),
+    name: name,
     type: "node",
+    attribute: attributeArray,
     children: [],
   };
+
   current.tag.children.push(tag);
   if (!isClose) {
     stack.push({ tag, back: current });
-    return true;
   }
-  return false;
-};
 
-const trimAll = (target) => {
-  return target.replace(/[\n\t\r]/g, "").trim();
+  return !isClose;
 };
