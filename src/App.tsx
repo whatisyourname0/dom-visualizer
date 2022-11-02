@@ -3,6 +3,7 @@ import Sidebar from "./Components/Sidebar/SIdebar";
 import { MAIN_COLOR } from "./styles/colors";
 
 function App() {
+
   return (
     <MainCointainer>
       <Sidebar />
